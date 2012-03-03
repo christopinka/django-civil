@@ -198,7 +198,7 @@ INSTALLED_APPS = (
     'tagging',
     'smuggler',
     'mptt',
-    
+
     '%s.library' % PROJECT_DIRNAME,
     '%s.apps.base' % PROJECT_DIRNAME,
     '%s.apps.batchimport' % PROJECT_DIRNAME,
@@ -211,6 +211,7 @@ INSTALLED_APPS = (
     '%s.apps.mobile' % PROJECT_DIRNAME,
     '%s.apps.search' % PROJECT_DIRNAME,
     '%s.apps.social' % PROJECT_DIRNAME,
+    '%s.data' % PROJECT_DIRNAME, # used for initial import of custom data
 )
 
 #==============================================================================
