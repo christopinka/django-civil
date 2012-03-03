@@ -1,1 +1,4 @@
 *.pyc
+package.sh
+civil/thirdparty/*
+civil/data/*
