@@ -1,0 +1,73 @@
+[
+  {
+    "pk":1,
+    "model":"mail.outboundserver",
+    "fields":{
+       "name": "canipercaso.it",
+       "host": "mail.canipercaso.it",
+       "port": 25,
+       "username": "asilo@canipercaso.it",
+       "password": "isakko999",
+       "timeout": 120,
+       "default": 1,
+       "created": "2010-05-22 08:00:00"
+    }
+  },
+
+  {
+    "pk":1,
+    "model":"mail.inboundserver",
+    "fields":{
+       "name": "Bounce: asilo@canipercaso.it",
+       "email": "asilo@canipercaso.it",
+       "host": "mail.canipercaso.it",
+       "port": 110,
+       "username": "asilo@canipercaso.it",
+       "password": "isakko999",
+       "timeout": 120,
+       "default": 1,
+       "created": "2010-05-22 08:00:00"
+    }
+  },
+
+  { "pk":1,
+    "model":"mail.senderemail",
+    "fields": {
+      "name": "Asilo per Cani",
+      "email": "asilo@canipercaso.it",
+      "default": 1,
+      "created": "2010-05-22 08:00:00"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "mail.attachments",
+    "fields": {
+       "file": "uploads/uploads/associazione_2009_2010.pdf",
+       "created": "2010-05-22 08:00:00"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "mail.mailtemplate",
+    "fields": {
+       "sender": 1,
+       "text": "prova di esempio",
+       "included_contacts": [ 1 ],
+       "excluded_contacts": [],
+       "name": "Mimuv Eventi",
+       "attachments": [ 1 ],
+       "included_groups": [],
+       "html": "<p>\r\n\tBenvenuto {{ contact.first_name }} {{ contact.last_name}}</p>\r\n<p>\r\n\t&nbsp;</p>\r\n<p>\r\n\t<img alt=\"\" src=\"/media/uploads/uploads/logo_medium.png\" style=\"width: 89px; height: 53px; \" /></p>\r\n<p>\r\n\t<a href=\"/media/uploads/uploads/associazione_2009_2010.pdf\">/media/uploads/uploads/associazione_2009_2010.pdf</a></p>",
+       "signature": null,
+       "reply_to": 1,
+       "excluded_groups": [],
+       "server": 1,
+       "subject": "example",
+       "created": "2010-05-22 08:00:00"
+    }
+  }
+
+]

@@ -1,0 +1,116 @@
+django-civil
+
+- The Core
+
+ * 100% - mass update records
+            . testing
+ *  80% - merge objects
+            . testing
+            . check how to handle related fields 
+ * 100% - export to CSV (normal and advanced)
+            . testing
+ *  50% - import from CSV, rewrite:
+            . no batchimport
+            . see django-iadmin
+            . use good things in merge objects action
+ *  60% - custom fields for content type
+ *  50% - dashboard organization
+            . reorganize when more models are added
+ *  50% - global configuration on json object (admin editing)
+            . make a better admin template
+ *   0% - advanced search
+            . let search in the whole models
+            . display advanced search in admin
+
+
+- Contacts
+
+ *  50% - base user fields
+ *   0% - groups and permissions, use:
+            . https://github.com/maraujop/django-rules
+ * 100% - relationships with other contacts
+ *   0% - organizations setup
+ *   0% - profiles and registration
+ *   0% - online payment, check:
+            . https://github.com/johnboxall/django-paypal
+
+
+- File Handling
+
+ * 100% - integrate django-filebrowser
+ *   0% - attach files to every model, check:
+            . https://github.com/bartTC/django-attachments
+
+
+- Newsletter / Mailing
+ 
+ *  10% - placeholder in mail content/footer
+            . setup placeholders
+            . make ckeditor buttons to ease discovery of placeholders
+ *   0% - bounce mail handling
+            . fetch a mailbox
+            . parse messages to check what happened
+ *  25% - configurazione inbox
+ *  50% - wrong email sent handling
+ *  90% - resend wrong emails
+ * 100% - templates html wysiwyg editing with ckeditor
+ * 100% - smtp configuration
+ * 100% - from_email handling
+ * 100% - sent log handling (single newsletter, single destination)
+   
+
+- Third Party Syncronization
+
+ *  10% - openid login (google)
+ *   0% - google calendar sync
+ *   ?  - other services to sync
+
+
+- Frontend
+
+ * gestione articoli (10%)
+ * configurazione menu del sito (struttura) (0%)
+            . tipologie di pagine linkabili (lista articoli, articolo singolo, etc..)
+ * gallerie caricamento immagini (singole / batch) (0%)
+            . https://code.google.com/p/django-photologue
+ * gallerie manipolazione immagini (rotate, scale, resize, blah blah) (0%)
+            . https://github.com/sorl/sorl-thumbnail
+ * configurezione skins (25%)
+            . http://blueprintcss.org/
+ * gestione moduli e personalizzazione div nelle skins (0%)
+ * categorie (0%)
+ * news (0%)
+ * commenti (threads) (0%)
+            . https://github.com/HonzaKral/django-threadedcomments/tree/master/threadedcomments
+ * gestione articoli (0%)
+ * registrazione utente / richiesta password (0%)
+ * modifica dati personali dal sito frontend (0%)
+
+
+- Tagging
+
+ * gestione tags (100%)
+            . http://code.google.com/p/django-tagging/
+ * impostare tags per ogni oggetto (0%)
+ * ricerca oggetti per tag (0%)
+ * tag clouds nella dashboard (0%)
+
+
+- Mobile
+
+ * gestione del sito via mobile (0%)
+            . https://github.com/gregmuellegger/django-mobile
+
+
+- Utilities
+
+ * tutorials
+            . http://www.ibm.com/developerworks/opensource/library/os-django-admin/index.html
+ * templates
+            . http://www.djangoslingshot.com/
+ * useful stuff
+           . https://bitbucket.org/lukaszb/django-projector
+           . https://bitbucket.org/carljm/django-model-utils
+           . https://github.com/omab/django-social-auth
+ * hosting
+            . http://www.webfaction.com/why-webfaction/

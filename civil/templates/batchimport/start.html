@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block messages %}
+    {% if form.errors %}
+    <p>{{ form.errors }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div id="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; {% trans 'Import' %}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form enctype="multipart/form-data" action="{% url 'batchimport_import_start' %}" method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

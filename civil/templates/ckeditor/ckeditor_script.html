@@ -1,0 +1,18 @@
+<script type="text/javascript">
+<!--
+
+(function($) {
+
+    window.Django_CKEditor_Configs.push({
+        re: /{{ regex }}/,
+        config: {{ config|safe }}
+    });
+
+    {% if filebrowser %}
+        CKEDITOR.config.filebrowserBrowseUrl = '/admin/filebrowser/browse/?pop=3';
+    {% endif %}
+
+}(django.jQuery));
+
+-->
+</script>

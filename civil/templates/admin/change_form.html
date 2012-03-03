@@ -1,0 +1,30 @@
+{% smart_extends "admin/change_form.html" %}
+
+<!-- LOADING -->
+{% load url from future %}
+{% load adminmedia admin_list admin_urls i18n %}
+
+<!-- BREADCRUMBS -->
+{% block breadcrumbs %}
+    {% if not is_popup %}
+        <div id="breadcrumbs" class="breadcrumbs">
+            <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+            <a href="{% url 'admin:app_list' app_label %}">{% trans app_label|capfirst|escape %}</a> &rsaquo;
+            {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo; 
+            {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+<!-- OBJECT TOOLS -->
+{% block object-tools-items %}
+    {% for button in buttons %}
+        {% if button.href %}
+            <li><a href="{{ button.href }}" class="focus {{ button.short_description|slugify }}">{{ button.short_description }}</a></li>
+        {% else %}{% if button.func_name %}
+            <li><a href="{{ button.func_name }}/" class="{{ button.short_description|slugify }}">{{ button.short_description }}</a></li>
+        {% endif %}{% endif %}
+    {% endfor %}
+    <li><a href="{% url opts|admin_urlname:'history' object_id %}">{% trans "History" %}</a></li>
+    {% if has_absolute_url %}<li><a href="{% url 'admin:index' %}/r/{{ content_type_id }}/{{ object_id }}/" class="focus" target="_blank">{% trans "View on site" %}</a></li>{% endif%}
+{% endblock %}

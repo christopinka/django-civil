@@ -1,0 +1,113 @@
+{% extends "admin/base_site.html" %}
+
+<!-- LOADING -->
+{% load url from future %}
+{% load adminmedia admin_list admin_urls i18n string_manip %}
+
+<!-- STYLESHEETS -->
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock %}
+
+<!-- JAVASCRIPTS -->
+{% block javascripts %}
+    {{ block.super }}
+    {% url 'admin:jsi18n' as jsi18nurl %}
+    <script type="text/javascript" src="{{ jsi18nurl|default:'../../../jsi18n/' }}"></script>
+    <script src="{% admin_media_prefix %}js/grappelli/jquery.grp_inline.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        (function($) {
+            var hideForms = function() {
+                $(".add-another").hide();
+                $("#view-form :input").prop("readonly", true);
+                $("#view-form select").prop("disabled", true);
+                $("#view-form select").attr("readonly", true);
+                $("#view-form :submit").prop("disabled", true);
+                $(".selector-available").hide();
+                $(".selector-chooser").hide();
+                $(".selector-clearall").hide();
+                $(".selector-filter").hide();
+                $(".fb_show").hide();
+                $(".collapse-handler").css("cursor", "default");
+            };
+
+            $(document).ready(function(){
+                hideForms();
+                setTimeout(hideForms, 500);
+            });
+        }(django.jQuery));
+    </script>
+    {{ media }}
+{% endblock %}
+
+<!-- COLTYPE/BODYCLASS -->
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+{% block content-class %}content-flexible{% endblock %}
+
+<!-- BREADCRUMBS -->
+{% block breadcrumbs %}
+    {% if not is_popup %}
+        <div id="breadcrumbs" class="breadcrumbs">
+             <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+             <a href="{% url 'admin:app_list' app_label %}">{% trans app_label|capfirst|escape %}</a> &rsaquo;
+             {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo; 
+             {{ original|truncatewords:"18" }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+<!-- OBJECT TOOLS -->
+{% block object-tools %}
+    {% if not is_popup %}
+        <ul class="tools">
+            {% block object-tools-items %}
+                {% for button in buttons %}
+                    {% if button.href %}
+                        <li><a href="{{ button.href }}" class="focus {{ button.short_description|slugify }}">{{ button.short_description }}</a></li>
+                    {% else %}{% if button.func_name %}
+                        <li><a href="{{ button.func_name }}/" class="{{ button.short_description|slugify }}">{{ button.short_description }}</a></li>
+                    {% endif %}{% endif %}
+                {% endfor %}
+                <li><a href="{% url opts|admin_urlname:'changelist' %}">{% trans "< Back to list" %}</a></li>
+                {% if has_change_permission %}<li><a href="{% url opts|admin_urlname:'change' object_id %}">{% trans "Modify" %}</a></li>{% endif %}
+                <li><a href="{% url opts|admin_urlname:'history' object_id %}">{% trans "History" %}</a></li>
+                {% if has_absolute_url %}<li><a href="{% url 'admin:index' %}/r/{{ content_type_id }}/{{ object_id }}/" class="focus" target="_blank">{% trans "View on site" %}</a></li>{% endif%}
+            {% endblock %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+<!-- CONTENT -->
+{% block content %}
+    <div class="container-flexible">
+        <div class="form-container">
+            <form id="view-form">
+                <div>
+                    <!-- Readonly Mode For The Page -->
+                    <input type="hidden" id="_readonly_mode" value="1" />
+
+                    <!-- Popup Hidden Field -->
+                    {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+                    
+                    <!-- Fieldsets -->
+                    {% for fieldset in adminform %}
+                        {% include "admin/includes/fieldset_view.html" %}
+                    {% endfor %}
+                    
+                    {% block after_field_sets %}{% endblock %}
+                    
+                    <!-- Inlines -->
+                    {% for inline_admin_formset in inline_admin_formsets %}
+                        {% if inline_admin_formset.opts.template|endswith:"stacked.html" %}
+                            {% include "admin/view_inline/stacked.html" %}
+                        {% else %}
+                            {% include "admin/view_inline/tabular.html" %}
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% block after_related_objects %}{% endblock %}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

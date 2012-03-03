@@ -1,0 +1,30 @@
+{% spaceless %}
+    <fieldset class="module {{ fieldset.classes }}">
+        {% if fieldset.name %}<h2 class="collapse-handler">{{ fieldset.name }}</h2>{% endif %}
+        {% if fieldset.description %}<div class="description">{{ fieldset.description|safe }}</div>{% endif %}
+        {% for line in fieldset %}
+            <div class="row cells-{{ line.fields|length }}{% if not line.fields|length_is:"1" %} cells{% else %}{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %} ">
+                {% for field in line %}
+                    <div{% if not line.fields|length_is:"1" %} class="cell {{ field.field.name }}"{% endif %}>
+                        <div class="column span-4">{{ field.field.label|capfirst }}</div>
+                        <div class="column span-flexible">
+                            {% if field.is_checkbox %}
+                                    {% if field.field.value %}
+                                        <img src="{{ STATIC_URL}}grappelli/img/admin/icon-yes.gif" /> 
+                                    {% else %}
+                                        <img src="{{ STATIC_URL}}grappelli/img/admin/icon-no.gif" /> 
+                                    {% endif %}
+                            {% else %}
+                                    {% comment %}{% if field.field.value %}{{ field.field }}{% else %}-{% endif %}{% endcomment %}
+                                    {{ field.field }}
+                            {% endif %}
+                            {% if field.field.field.help_text %}
+                                <p class="help">{{ field.field.field.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </fieldset>
+{% endspaceless %}

@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block extrahead %}{{ block.super }}
+    <style type="text/css">
+        #form{
+            width: 100%;
+        }
+        .configform {
+            width: 49%;
+        }
+        .configform table {
+            width: 100%;
+        }
+        .configform table th {
+            width: 25%;
+            min-width: 100px;
+        }
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+        }
+    </style>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div id="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; {% trans 'Edit configuration' %}
+    </div>
+{% endblock %}
+
+{% block content-class %}content-flexible{% endblock %}
+
+{% block content %}
+    <div id="form">
+        <form action="" method="post">{% csrf_token %}
+
+            {% for form in forms %}
+            <div class="configform {{ form.position }}">
+                <h2>{{ form.title }}</h2>
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <br clear="all" />
+            </div>
+            <br clear="all" />
+            {% endfor %}
+
+            <div class="module footer">
+                <ul class="submit-row">
+                    <li class="left cancel-button-container"><a href="{% url 'admin:index' %}" class="cancel-link">{% trans "Cancel" %}</a></li>
+                    <li class="submit-button-container"><input type="submit" value="{% trans 'Save configuration' %}" class="default" name="apply" /></li>
+                </ul>
+                <br clear="all" />
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

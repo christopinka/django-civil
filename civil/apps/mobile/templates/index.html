@@ -1,0 +1,152 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+    <title>My Page</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+</head> 
+<body> 
+
+<!-- Start of first page -->
+<div data-role="page" id="start" data-title="My Title">
+
+    <div data-role="header">
+        <a href="index.html" data-role="button" data-icon="plus">Add</a>
+        <h1>My Title</h1>
+        <a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+    </div><!-- /header -->
+
+    <div data-role="content">    
+        <!--<p>Hello world</p>-->
+        <ul data-role="listview" data-inset="true" data-filter="true">
+            <li><a href="#dialog">Acura</a></li>
+            <li><a href="#dialog" data-rel="dialog" data-transition="slidedown">Audi</a></li>
+            <li><a href="#dialog">BMW</a></li>
+            <li><a href="#dialog">Cadillac</a></li>
+            <li><a href="#dialog">Ferrari</a></li>
+        </ul>
+        <form>
+           <label for="slider-0">Input slider:</label>
+           <input type="range" name="slider" id="slider-0" value="25" min="0" max="100"  />
+        </form>
+        
+        <div data-role="controlgroup" data-type="horizontal">
+            <a href="#dialog" data-role="button">Yes</a>
+            <a href="#dialog" data-role="button">No</a>
+            <a href="#dialog" data-role="button">Maybe</a>
+        </div>
+        
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#start" data-icon="grid">One</a></li>
+                <li><a href="#dialog" data-icon="star">Two</a></li>
+                <li><a href="#form" data-icon="gear">Three</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="dialog" data-theme="a" data-title="My Title 2">
+
+    <div data-role="header">
+        <h1>Whhhuuazzap!</h1>
+    </div><!-- /header -->
+
+    <div data-role="content">  
+        <p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my ID is beeing clicked.</p>        
+        <p align="center">
+            <a href="#start" data-role="button" data-inline="true" data-direction="reverse">Cancel</a>
+            <a href="#start" data-role="button" data-inline="true" data-direction="reverse" data-theme="b">Save</a>
+        </p>
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h1>My Title</h1>
+    </div><!-- /footer -->
+
+</div><!-- /page -->
+
+
+<!-- Start of third page -->
+<div data-role="page" id="form" data-title="My Form">
+
+    <div data-role="header">
+        <h1>Whhhuuazzap!</h1>
+    </div><!-- /header -->
+
+    <div data-role="content">  
+
+		<div data-role="collapsible" data-theme="b" data-content-theme="b">
+			<h3>I'm a header</h3>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+			Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+			amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo.
+			Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed,
+			<code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum,
+			eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis.
+			Ut felis.</p>
+		</div>
+				
+		<h3>Embedded form</h3>
+				
+		<form action="#" method="get">
+
+			<div data-role="fieldcontain">
+				<label for="name">Text Input:</label>
+				<input type="text" name="name" id="name" value=""  />
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="textarea">Textarea:</label>
+				<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="slider2">Flip switch:</label>
+				<select name="slider2" id="slider2" data-role="slider">
+					<option value="off">Off</option>
+					<option value="on">On</option>
+				</select>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="slider">Slider:</label>
+				<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+			</div>
+
+
+			<div data-role="fieldcontain">
+				<label for="select-choice-1" class="select">Choose shipping method:</label>
+				<select name="select-choice-1" id="select-choice-1">
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+			</div>
+
+			<div class="ui-body ui-body-b">
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+					<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>
+				</fieldset>
+			</div>
+		</form>
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h1>My Title</h1>
+    </div><!-- /footer -->
+
+
+</body>
+</html>
+</html>

@@ -1,0 +1,41 @@
+[
+   {
+     "pk": 1,
+     "model": "social.nonce",
+     "fields": {
+       "timestamp": 1330013061,
+       "salt": "PzlPFJqil1XU6Q",
+       "server_url": "https://www.google.com/accounts/o8/ud"
+     }
+   },
+   {
+     "pk": 2,
+     "model": "social.nonce",
+     "fields": {
+       "timestamp": 1330013704,
+       "salt": "7yQRLJhOL-XrIQ",
+       "server_url": "https://www.google.com/accounts/o8/ud"
+     }
+   },
+   {
+     "pk": 1,
+     "model": "social.association",
+     "fields": {
+       "handle": "AMlYA9VXc-uEwq0K6jJk-tG5Fc2j6X0QnNR2voyvBWt4Y6I5DReLymi6",
+       "issued": 1330013015,
+       "server_url": "https://www.google.com/accounts/o8/ud",
+       "assoc_type": "HMAC-SHA1",
+       "secret": "gxxJEEio0uKq2v4UH4MwzUu+KFk=\n",
+       "lifetime": 46800
+     }
+   },
+   {
+     "pk": 1,
+     "model": "social.useropenid",
+     "fields": {
+       "display_id": "https://www.google.com/accounts/o8/id?id=AItOawkmgbf5hTabCBqYwMmm0mE_OkaT11KlzuU",
+       "claimed_id": "https://www.google.com/accounts/o8/id?id=AItOawkmgbf5hTabCBqYwMmm0mE_OkaT11KlzuU",
+       "user": 1
+     }
+   }
+]

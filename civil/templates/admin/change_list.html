@@ -1,0 +1,28 @@
+{% smart_extends "admin/change_list.html" %}
+
+<!-- LOADING -->
+{% load url from future %}
+{% load adminmedia admin_list admin_urls i18n %}
+
+<!-- BREADCRUMBS -->
+{% block breadcrumbs %}
+    {% if not is_popup %}
+        <div id="breadcrumbs" class="breadcrumbs">
+            <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+            <a href="{% url 'admin:app_list' app_label %}">{% trans app_label|capfirst|escape %}</a> &rsaquo;
+            {{ cl.opts.verbose_name_plural|capfirst }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+<!-- OBJECT-TOOLS-ITEMS -->
+{% block object-tools-items %}
+    {% for button in buttons %}
+        {% if button.href %}
+            <li><a href="{{ button.href }}" class="focus {{ button.short_description|slugify }}">{{ button.short_description }}</a></li>
+        {% else %}{% if button.func_name %}
+            <li><a href="{{ button.func_name }}/" class="{{ button.short_description|slugify }}">{{ button.short_description }}</a></li>
+        {% endif %}{% endif %}
+    {% endfor %}
+    <li><a href="add/{% if is_popup %}?_popup=1{% endif %}" class="add-handler focus">{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}</a></li>
+{% endblock %}

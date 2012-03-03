@@ -1,0 +1,265 @@
+[
+  {
+    "pk": 1,
+    "model": "frontend.theme",
+    "fields": {
+      "name": "Example Theme",
+      "created": "2012-02-20 13:42:01",
+      "default": true,
+      "modified": "2012-02-20 13:42:16",
+      "version": 1.0,
+      "slug": "example-theme"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "frontend.themeplaceholder",
+    "fields": {
+      "theme": 1,
+      "name": "title",
+      "created": "2012-02-20 13:42:01",
+      "modified": "2012-02-20 13:42:16"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "frontend.themeplaceholder",
+    "fields": {
+      "theme": 1,
+      "name": "description",
+      "created": "2012-02-20 13:42:01",
+      "modified": "2012-02-20 13:42:16"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "frontend.themeplaceholder",
+    "fields": {
+      "theme": 1,
+      "name": "topmenu",
+      "created": "2012-02-20 13:42:01",
+      "modified": "2012-02-20 13:42:16"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "frontend.themeplaceholder",
+    "fields": {
+      "theme": 1,
+      "name": "content",
+      "created": "2012-02-20 13:42:01",
+      "modified": "2012-02-20 13:42:16"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "frontend.themeplaceholder",
+    "fields": {
+      "theme": 1,
+      "name": "sidebar",
+      "created": "2012-02-20 13:42:01",
+      "modified": "2012-02-20 13:42:16"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "frontend.themeplaceholder",
+    "fields": {
+      "theme": 1,
+      "name": "footer",
+      "created": "2012-02-20 13:42:01",
+      "modified": "2012-02-20 13:42:16"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "frontend.plugin",
+    "fields": {
+      "slug": "example-plugin",
+      "version": 0.1,
+      "modified": "2012-02-20 15:11:14",
+      "name": "Example Plugin",
+      "created": "2012-02-20 15:10:21"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "frontend.plugin",
+    "fields": {
+      "slug": "simple-menu",
+      "version": 0.1,
+      "modified": "2012-02-20 16:00:10",
+      "name": "Simple Menu",
+      "created": "2012-02-20 16:00:10"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "frontend.plugin",
+    "fields": {
+      "slug": "generic-html",
+      "version": 0.1,
+      "modified": "2012-02-20 16:00:10",
+      "name": "Generic Html",
+      "created": "2012-02-20 16:00:10"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "frontend.pluginposition",
+    "fields": {
+      "status": 2,
+      "included_pages": [],
+      "name": "Titolo Pagina",
+      "created": "2012-02-20 16:44:33",
+      "custom_html": "<h1>\r\n\t{{ page.title }}</h1>\r\n<hr />",
+      "excluded_pages": [],
+      "show_name": false,
+      "plugin": 3,
+      "modified": "2012-02-20 16:44:33",
+      "access": 1,
+      "all_pages": true,
+      "position": 1,
+      "order": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "frontend.pluginposition",
+    "fields": {
+      "status": 2,
+      "included_pages": [],
+      "name": "Contenuto",
+      "created": "2012-02-20 16:45:12",
+      "custom_html": "<p>\r\n\t{{ page.content }}</p>",
+      "excluded_pages": [],
+      "show_name": false,
+      "plugin": 3,
+      "modified": "2012-02-20 16:45:12",
+      "access": 1,
+      "all_pages": true,
+      "position": 4,
+      "order": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "frontend.pluginposition",
+    "fields": {
+      "status": 2,
+      "included_pages": [],
+      "name": "Sidebar Menu",
+      "created": "2012-02-20 16:59:18",
+      "custom_html": "",
+      "excluded_pages": [],
+      "show_name": false,
+      "plugin": 2,
+      "modified": "2012-02-20 16:59:18",
+      "access": 1,
+      "all_pages": true,
+      "position": 5,
+      "order": 1
+    }
+  },
+  {
+    "pk": 4,
+    "model": "frontend.pluginposition",
+    "fields": {
+      "status": 2,
+      "included_pages": [],
+      "name": "Login",
+      "created": "2012-02-20 17:24:03",
+      "custom_html": "<form action=\"{% url 'login_view' %}\" method=\"POST\">\r\n\t{% csrf_token %} Username: <input name=\"username\" type=\"text\" /><br />\r\n\tPassword: <input name=\"password\" type=\"password\" /><br />\r\n\t<input name=\"login\" type=\"submit\" value=\"Login\" />&nbsp;</form>\r\n<p>\r\n\t<a href=\"#\">Registrati qui</a></p>\r\n<p>\r\n\t<a href=\"#\">Hai dimenticato la password ?</a></p>",
+      "excluded_pages": [],
+      "show_name": false,
+      "plugin": 3,
+      "modified": "2012-02-20 17:33:25",
+      "access": 3,
+      "all_pages": true,
+      "position": 5,
+      "order": 2
+    }
+  },
+  {
+    "pk": 5,
+    "model": "frontend.pluginposition",
+    "fields": {
+      "status": 2,
+      "included_pages": [],
+      "name": "Logged",
+      "created": "2012-02-20 17:42:45",
+      "custom_html": "<p>\r\n\tWelcome {{ request.user }}, <a href=\"{% url 'logout_view' %}\">logout</a></p>",
+      "excluded_pages": [],
+      "show_name": false,
+      "plugin": 3,
+      "modified": "2012-02-20 17:43:33",
+      "access": 2,
+      "all_pages": true,
+      "position": 5,
+      "order": 2
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "frontend.page",
+    "fields": {
+      "status": 2,
+      "content": "<p>\r\n\t<img alt=\"\" src=\"/media/uploads/uploads/logo.png\" style=\"width: 89px; height: 53px; \" />{% load frontend_themes %}</p>\r\n<p>\r\n\t<img alt=\"test\" class=\"top pull-1 left\" src=\"{% frontend_default_theme_url %}images/test.jpg\" />Lorem ipsum dolor sit amet, <em>consectetuer adipiscing elit</em>. Nunc congue ipsum vestibulum libero. Aenean vitae justo. Nam eget tellus. Etiam convallis, est eu lobortis mattis, lectus tellus tempus felis, a ultricies erat ipsum at metus.</p>\r\n<p>\r\n\tLorem ipsum dolor sit amet, consectetuer adipiscing elit. <a href=\"#\">Morbi et risus</a>. Aliquam nisl. Nulla facilisi. Cras accumsan vestibulum ante. Vestibulum sed tortor. Praesent <span class=\"caps\">SMALL CAPS</span> tempus fringilla elit. Ut elit diam, sagittis in, nonummy in, gravida non, nunc. Ut orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Nam egestas, orci eu imperdiet malesuada, nisl purus fringilla odio, quis commodo est orci vitae justo. Aliquam placerat odio tincidunt nulla. Cras in libero. Aenean rutrum, magna non tristique posuere, erat odio eleifend nisl, non convallis est tortor blandit ligula. Nulla id augue.</p>\r\n<p>\r\n\tNullam mattis, odio ut tempus facilisis, metus nisl facilisis metus, auctor consectetuer felis ligula nec mauris. Vestibulum odio erat, fermentum at, commodo vitae, ultrices et, urna. Mauris vulputate, mi pulvinar sagittis condimentum, sem nulla aliquam velit, sed imperdiet mi purus eu magna. Nulla varius metus ut eros. Aenean aliquet magna eget orci. Class aptent taciti sociosqu ad litora.</p>\r\n<p>\r\n\tVivamus euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse vel nibh ut turpis dictum sagittis. Aliquam vel velit a elit auctor sollicitudin. Nam vel dui vel neque lacinia pretium. Quisque nunc erat, venenatis id, volutpat ut, scelerisque sed, diam. Mauris ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec mattis. Morbi dignissim sollicitudin libero. Nulla lorem.</p>\r\n<blockquote>\r\n\t<p>\r\n\t\tInteger cursus ornare mauris. Praesent nisl arcu, imperdiet eu, ornare id, scelerisque ut, nunc. Praesent sagittis erat sed velit tempus imperdiet. Ut tristique, ante in interdum hendrerit, erat enim faucibus felis, quis rutrum mauris lorem quis sem. Vestibulum ligula nisi, mattis nec, posuere et, blandit eu, ligula. Nam suscipit placerat odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Pellentesque tortor libero, venenatis vitae, rhoncus eu, placerat ut, mi. Nulla nulla.</p>\r\n</blockquote>\r\n<p>\r\n\tMaecenas vel metus quis magna pharetra fermentum. <em>Integer sit amet tortor</em>. Maecenas porttitor, pede sed gravida auctor, nulla augue aliquet elit, at pretium urna orci ut metus. Aliquam in dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, tellus id ornare posuere, quam nunc accumsan turpis, at convallis tellus orci et nisl. Phasellus congue neque a lorem.</p>",
+      "is_index": true,
+      "name": "index",
+      "created": "2012-02-20 13:45:14",
+      "expiration_date": null,
+      "author": 1,
+      "excerpt": "",
+      "modified": "2012-02-20 13:45:14",
+      "access": 1,
+      "parent": null,
+      "publish_date": "2012-02-20 13:44:57",
+      "keywords": "",
+      "title": "Esempio di titolo",
+      "slug": "index",
+      "description": "",
+      "rght": 2,
+      "level": 0,
+      "lft": 1,
+      "tree_id": 1
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "frontend.menu",
+    "fields": {
+      "status": 2,
+      "name": "Left Menu",
+      "created": "2012-02-20 18:02:36",
+      "modified": "2012-02-20 18:02:36",
+      "access": 1,
+      "slug": "left-menu"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "frontend.menuitem",
+    "fields": {
+      "status": 2,
+      "name": "Home",
+      "created": "2012-02-20 18:02:36",
+      "menu": 1,
+      "modified": "2012-02-20 18:02:36",
+      "page": 1,
+      "access": 1,
+      "slug": "home",
+      "parent": null,
+      "rght": 2,
+      "level": 0,
+      "lft": 1,
+      "tree_id": 1
+    }
+  }
+]

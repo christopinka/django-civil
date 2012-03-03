@@ -1,0 +1,302 @@
+{% extends "admin/change_form.html" %}
+
+{% load url from future %}
+{% load i18n admin_modify adminmedia mass_update %}
+
+{% block extrahead %}{{ block.super }}
+    <style type="text/css">
+        #form{
+            float: left;
+            width: 40%;
+        }
+
+        #legend{
+            float: left;
+            width: 60%;
+        }
+    </style>
+    <script type="text/javascript">
+        <!-- 
+        @see http://djangosnippets.org/snippets/84/
+
+        (function ($) {
+            $(document).ready(function ($) {
+                $('#id_datetime_format, #id_date_format, #id_time_format,').after('&nbsp;&nbsp;<span class="sample"></span>');
+                var _url = ""; {% comment %}"{% url admin:format_date %}";{% endcomment %}
+                var get_format = function (sender) {
+                    $.get(_url, {'fmt':$(sender).val()},
+                            function (data) {
+                                $(sender).next('.sample').html(data);
+                            }
+                    );
+                };
+
+                $('#id_datetime_format, #id_date_format, #id_time_format,').keyup(function () {
+                    clearTimeout($(this).data('timer'));
+                    var target = $(this);
+                    var wait = setTimeout(function () {
+                        //get_format(target);
+                    }, 500);
+                    $(this).data('timer', wait);
+
+
+                });
+                $('#id_datetime_format, #id_date_format, #id_time_format,').trigger('keyup');
+            });
+        })(django.jQuery);
+        -->
+    </script>
+{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+    <div class="breadcrumbs" id="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+        <a href="{% url 'admin:app_list' app_label %}">{% trans app_label|capfirst|escape %}</a> &rsaquo;
+        <a href=".">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
+        CSV Export Options
+    </div>
+{% endif %}{% endblock %}
+
+{% block content-class %}content-flexible{% endblock %}
+
+{% block content %}
+    {% if form.subject.errors %}
+        <ol>
+            {% for error in form.subject.errors %}
+                <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+    <div id="form">
+        <form action="" method="post">{% csrf_token %}
+
+            <table>
+                {{ adminform.form }}
+            </table>
+
+            <input type="hidden" name="action" value="{{ action }}"/>
+
+            <div class="module footer">
+                <ul class="submit-row">
+                    <li class="left cancel-button-container"><a href="." class="cancel-link">{% trans "Cancel" %}</a></li>
+                    <li class="submit-button-container"><input type="submit" value="{% trans 'Export records' %}" class="default" name="apply" /></li>
+                </ul>
+                <br clear="all" />
+            </div>
+
+        </form>
+    </div>
+
+    <div id="legend">
+
+        <table class="docutils">
+            <colgroup>
+                <col width="12%">
+                <col width="57%">
+                <col width="31%">
+            </colgroup>
+            <thead valign="bottom">
+                <tr><th class="head">Format character</th>
+                <th class="head">Description</th>
+                <th class="head">Example output</th>
+                </tr>
+            </thead>
+            <tbody valign="top">
+                <tr><td>a</td>
+                <td><tt class="docutils literal"><span class="pre">'a.m.'</span></tt> or <tt class="docutils literal"><span class="pre">'p.m.'</span></tt> (Note that
+                this is slightly different than PHP's
+                output, because this includes periods
+                to match Associated Press style.)</td>
+                <td><tt class="docutils literal"><span class="pre">'a.m.'</span></tt></td>
+                </tr>
+                <tr><td>A</td>
+                <td><tt class="docutils literal"><span class="pre">'AM'</span></tt> or <tt class="docutils literal"><span class="pre">'PM'</span></tt>.</td>
+                <td><tt class="docutils literal"><span class="pre">'AM'</span></tt></td>
+                </tr>
+                <tr><td>b</td>
+                <td>Month, textual, 3 letters, lowercase.</td>
+                <td><tt class="docutils literal"><span class="pre">'jan'</span></tt></td>
+                </tr>
+                <tr><td>B</td>
+                <td>Not implemented.</td>
+                <td>&nbsp;</td>
+                </tr>
+                <tr><td>c</td>
+                <td>ISO 8601 format. (Note: unlike others
+                formatters, such as "Z", "O" or "r",
+                the "c" formatter will not add timezone
+                offset if value is a naive datetime
+                (see <a class="reference external" href="http://docs.python.org/2.7/library/datetime.html#datetime.tzinfo" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">datetime.tzinfo</span></tt></a>).</td>
+                <td><tt class="docutils literal"><span class="pre">2008-01-02T10:30:00.000123+02:00</span></tt>,
+                or <tt class="docutils literal"><span class="pre">2008-01-02T10:30:00.000123</span></tt> if the datetime is naive</td>
+                </tr>
+                <tr><td>d</td>
+                <td>Day of the month, 2 digits with
+                leading zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'01'</span></tt> to <tt class="docutils literal"><span class="pre">'31'</span></tt></td>
+                </tr>
+                <tr><td>D</td>
+                <td>Day of the week, textual, 3 letters.</td>
+                <td><tt class="docutils literal"><span class="pre">'Fri'</span></tt></td>
+                </tr>
+                <tr><td>e</td>
+                <td>Timezone name. Could be in any format,
+                or might return an empty string,
+                depending on the datetime.</td>
+                <td><tt class="docutils literal"><span class="pre">''</span></tt>, <tt class="docutils literal"><span class="pre">'GMT'</span></tt>, <tt class="docutils literal"><span class="pre">'-500'</span></tt>, <tt class="docutils literal"><span class="pre">'US/Eastern'</span></tt>, etc.</td>
+                </tr>
+                <tr><td>E</td>
+                <td>Month, locale specific alternative
+                representation usually used for long
+                date representation.</td>
+                <td><tt class="docutils literal"><span class="pre">'listopada'</span></tt> (for Polish locale, as opposed to <tt class="docutils literal"><span class="pre">'Listopad'</span></tt>)</td>
+                </tr>
+                <tr><td>f</td>
+                <td>Time, in 12-hour hours and minutes,
+                with minutes left off if they're zero.
+                Proprietary extension.</td>
+                <td><tt class="docutils literal"><span class="pre">'1'</span></tt>, <tt class="docutils literal"><span class="pre">'1:30'</span></tt></td>
+                </tr>
+                <tr><td>F</td>
+                <td>Month, textual, long.</td>
+                <td><tt class="docutils literal"><span class="pre">'January'</span></tt></td>
+                </tr>
+                <tr><td>g</td>
+                <td>Hour, 12-hour format without leading
+                zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'1'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+                </tr>
+                <tr><td>G</td>
+                <td>Hour, 24-hour format without leading
+                zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'0'</span></tt> to <tt class="docutils literal"><span class="pre">'23'</span></tt></td>
+                </tr>
+                <tr><td>h</td>
+                <td>Hour, 12-hour format.</td>
+                <td><tt class="docutils literal"><span class="pre">'01'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+                </tr>
+                <tr><td>H</td>
+                <td>Hour, 24-hour format.</td>
+                <td><tt class="docutils literal"><span class="pre">'00'</span></tt> to <tt class="docutils literal"><span class="pre">'23'</span></tt></td>
+                </tr>
+                <tr><td>i</td>
+                <td>Minutes.</td>
+                <td><tt class="docutils literal"><span class="pre">'00'</span></tt> to <tt class="docutils literal"><span class="pre">'59'</span></tt></td>
+                </tr>
+                <tr><td>I</td>
+                <td>Not implemented.</td>
+                <td>&nbsp;</td>
+                </tr>
+                <tr><td>j</td>
+                <td>Day of the month without leading
+                zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'1'</span></tt> to <tt class="docutils literal"><span class="pre">'31'</span></tt></td>
+                </tr>
+                <tr><td>l</td>
+                <td>Day of the week, textual, long.</td>
+                <td><tt class="docutils literal"><span class="pre">'Friday'</span></tt></td>
+                </tr>
+                <tr><td>L</td>
+                <td>Boolean for whether it's a leap year.</td>
+                <td><tt class="xref docutils literal"><span class="pre">True</span></tt> or <tt class="xref docutils literal"><span class="pre">False</span></tt></td>
+                </tr>
+                <tr><td>m</td>
+                <td>Month, 2 digits with leading zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'01'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+                </tr>
+                <tr><td>M</td>
+                <td>Month, textual, 3 letters.</td>
+                <td><tt class="docutils literal"><span class="pre">'Jan'</span></tt></td>
+                </tr>
+                <tr><td>n</td>
+                <td>Month without leading zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'1'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+                </tr>
+                <tr><td>N</td>
+                <td>Month abbreviation in Associated Press
+                style. Proprietary extension.</td>
+                <td><tt class="docutils literal"><span class="pre">'Jan.'</span></tt>, <tt class="docutils literal"><span class="pre">'Feb.'</span></tt>, <tt class="docutils literal"><span class="pre">'March'</span></tt>, <tt class="docutils literal"><span class="pre">'May'</span></tt></td>
+                </tr>
+                <tr><td>o</td>
+                <td>ISO-8601 week-numbering year,
+                corresponding to
+                the ISO-8601 week number (W)</td>
+                <td><tt class="docutils literal"><span class="pre">'1999'</span></tt></td>
+                </tr>
+                <tr><td>O</td>
+                <td>Difference to Greenwich time in hours.</td>
+                <td><tt class="docutils literal"><span class="pre">'+0200'</span></tt></td>
+                </tr>
+                <tr><td>P</td>
+                <td>Time, in 12-hour hours, minutes and
+                'a.m.'/'p.m.', with minutes left off
+                if they're zero and the special-case
+                strings 'midnight' and 'noon' if
+                appropriate. Proprietary extension.</td>
+                <td><tt class="docutils literal"><span class="pre">'1</span> <span class="pre">a.m.'</span></tt>, <tt class="docutils literal"><span class="pre">'1:30</span> <span class="pre">p.m.'</span></tt>, <tt class="docutils literal"><span class="pre">'midnight'</span></tt>, <tt class="docutils literal"><span class="pre">'noon'</span></tt>, <tt class="docutils literal"><span class="pre">'12:30</span> <span class="pre">p.m.'</span></tt></td>
+                </tr>
+                <tr><td>r</td>
+                <td><span class="target" id="index-0"></span><a class="rfc reference external" href="http://tools.ietf.org/html/rfc2822.html"><strong>RFC 2822</strong></a> formatted date.</td>
+                <td><tt class="docutils literal"><span class="pre">'Thu,</span> <span class="pre">21</span> <span class="pre">Dec</span> <span class="pre">2000</span> <span class="pre">16:01:07</span> <span class="pre">+0200'</span></tt></td>
+                </tr>
+                <tr><td>s</td>
+                <td>Seconds, 2 digits with leading zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'00'</span></tt> to <tt class="docutils literal"><span class="pre">'59'</span></tt></td>
+                </tr>
+                <tr><td>S</td>
+                <td>English ordinal suffix for day of the
+                month, 2 characters.</td>
+                <td><tt class="docutils literal"><span class="pre">'st'</span></tt>, <tt class="docutils literal"><span class="pre">'nd'</span></tt>, <tt class="docutils literal"><span class="pre">'rd'</span></tt> or <tt class="docutils literal"><span class="pre">'th'</span></tt></td>
+                </tr>
+                <tr><td>t</td>
+                <td>Number of days in the given month.</td>
+                <td><tt class="docutils literal"><span class="pre">28</span></tt> to <tt class="docutils literal"><span class="pre">31</span></tt></td>
+                </tr>
+                <tr><td>T</td>
+                <td>Time zone of this machine.</td>
+                <td><tt class="docutils literal"><span class="pre">'EST'</span></tt>, <tt class="docutils literal"><span class="pre">'MDT'</span></tt></td>
+                </tr>
+                <tr><td>u</td>
+                <td>Microseconds.</td>
+                <td><tt class="docutils literal"><span class="pre">0</span></tt> to <tt class="docutils literal"><span class="pre">999999</span></tt></td>
+                </tr>
+                <tr><td>U</td>
+                <td>Seconds since the Unix Epoch
+                (January 1 1970 00:00:00 UTC).</td>
+                <td>&nbsp;</td>
+                </tr>
+                <tr><td>w</td>
+                <td>Day of the week, digits without
+                leading zeros.</td>
+                <td><tt class="docutils literal"><span class="pre">'0'</span></tt> (Sunday) to <tt class="docutils literal"><span class="pre">'6'</span></tt> (Saturday)</td>
+                </tr>
+                <tr><td>W</td>
+                <td>ISO-8601 week number of year, with
+                weeks starting on Monday.</td>
+                <td><tt class="docutils literal"><span class="pre">1</span></tt>, <tt class="docutils literal"><span class="pre">53</span></tt></td>
+                </tr>
+                <tr><td>y</td>
+                <td>Year, 2 digits.</td>
+                <td><tt class="docutils literal"><span class="pre">'99'</span></tt></td>
+                </tr>
+                <tr><td>Y</td>
+                <td>Year, 4 digits.</td>
+                <td><tt class="docutils literal"><span class="pre">'1999'</span></tt></td>
+                </tr>
+                <tr><td>z</td>
+                <td>Day of the year.</td>
+                <td><tt class="docutils literal"><span class="pre">0</span></tt> to <tt class="docutils literal"><span class="pre">365</span></tt></td>
+                </tr>
+                <tr><td>Z</td>
+                <td>Time zone offset in seconds. The
+                offset for timezones west of UTC is
+                always negative, and for those east of
+                UTC is always positive.</td>
+                <td><tt class="docutils literal"><span class="pre">-43200</span></tt> to <tt class="docutils literal"><span class="pre">43200</span></tt></td>
+                </tr>
+            </tbody>
+        </table>
+ 
+   </div>
+{% endblock %}

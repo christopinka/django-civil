@@ -1,0 +1,140 @@
+{% extends "admin/change_form.html" %}
+
+{% load url from future %}
+{% load i18n adminmedia getattribute %}
+
+{% block extrahead %}{{ block.super }}
+    <style type="text/css">
+        #col1 {
+            float: left;
+            width: 70%;
+        }
+        #col1 table {
+            width: 50%;
+        }
+        #col2 {
+            float: right;
+            width: 30%;
+        }
+        #col2 div {
+            width: 30%;
+            float: left;
+        }
+        #col2 select {
+            width: 70%;
+            float: right;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+    </script>
+{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+    <div id="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+        <a href="{% url 'admin:app_list' app_label %}">{% trans app_label|capfirst|escape %}</a> &rsaquo;
+        <a href=".">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
+        Merge Records
+    </div>
+{% endif %}{% endblock %}
+
+{% block content-class %}content-flexible{% endblock %}
+
+{% block content %}
+    {% if form.subject.errors %}
+        <ol>
+            {% for error in form.subject.errors %}
+                <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+    <div id="col1">
+        <form method="post" action="">{% csrf_token %}
+
+            <table>
+                {% for field in adminform.form.configured_fields %}
+                    <tr>
+                        <td>{% if field.field.required %}<b>{% endif %}
+                            {{ field.label_tag }}
+                            {% if field.field.required %}</b>{% endif %}
+                        </td>
+                        <td colspan="4">
+                            {{ field.errors }}
+                            {{ field }}{% if field.help_text %}&nbsp;<span class="help">{{ field.help_text }}</span>{% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                <tr><td colspan="5">&nbsp;</td></tr>
+                <tr>
+                    <th width="20%">field</th>
+                    <th width="30%">{{ left }}</th>
+                    <th>&nbsp;&gt;</th>
+                    <th>&nbsp;&lt;</th>
+                    <th width="30%">{{ right }}</th>
+                </tr>
+                {% for field in adminform.form.model_fields %}
+                    <tr class="{{ field.name }}-row">
+                        <td>{{ field.errors }}
+                            {% if field.field.required %}<b>{% endif %}
+                            {{ field.label_tag }}
+                            {% if field.field.required %}</b>{% endif %}</td>
+                        <td class="col_field field-{{ field.name }}-value">
+                            {% if left|getattr:field.name|getattr:"all" %}
+                                {% for a in left|getattr:field.name|getmethod:"all" %}
+                                    {{ a }}
+                                {% endfor %}
+                            {% else %}
+                                {{ left|getattr:field.name }}
+                            {% endif %}
+                            &nbsp;</td>
+                        <td class="col_enabler">
+                            <input type="radio" name="copy_id_{{ field.name }}" value="left" class="enabler"></td>
+                        <td class="col_enabler">
+                            <input type="radio" name="copy_id_{{ field.name }}" value="right" class="enabler"></td>
+                        <td class="col_field field-{{ field.name }}-value">
+                            {% if right|getattr:field.name|getattr:"all" %}
+                                {% for a in right|getattr:field.name|getmethod:"all" %}
+                                    {{ a }}
+                                {% endfor %}
+                            {% else %}
+                                {{ right|getattr:field.name }}
+                            {% endif %}
+                            &nbsp;</td>
+                    </tr>
+                {% endfor %}
+
+                {% for m in additional_models %}
+                    <tr class="model-{{ m.verbose_name }}-row">
+                        <td><b>{{ m.verbose_name_plural|capfirst }}</b></td>
+                        <td>&nbsp;</td>
+                        <td class="col_enabler">
+                            <input type="radio" name="model_id_{{ m.verbose_name }}" value="left" class="enabler"></td>
+                        <td class="col_enabler">
+                            <input type="radio" name="model_id_{{ m.verbose_name }}" value="right" class="enabler"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+
+            <input type="hidden" name="action" value="{{ action }}"/>
+            <input type="hidden" name="pk_left" value="{{ left.pk }}"/>
+            <input type="hidden" name="pk_right" value="{{ right.pk }}"/>
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            <div class="module footer">
+                <ul class="submit-row">
+                    <li class="left cancel-button-container"><a href="." class="cancel-link">{% trans "Cancel" %}</a></li>
+                    <li class="submit-button-container"><input type="submit" value="{% trans 'Merge records' %}" class="default" name="apply" /></li>
+                </ul>
+                <br clear="all" />
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}

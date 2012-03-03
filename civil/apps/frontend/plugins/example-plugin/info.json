@@ -1,0 +1,10 @@
+{
+  "name": "Example Plugin",
+  "slug": "example-plugin",
+  "version": 1.0,
+  "files": [
+    "info.json",
+    "main.py",
+    "__init__.py"
+  ]
+}

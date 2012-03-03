@@ -1,0 +1,14 @@
+{% extends "grappelli/dashboard/module.html" %}
+{% load i18n %}
+
+{% block module_content %}
+    <ul>
+        {% spaceless %}
+            {% for child in module.children %}
+                <li>
+                    {% if child.url %}<a class="internal" href="{{ child.url }}" {% if child.description %} title="{{ child.description }}"{% endif %}>{{ child.title }}</a>{% else %}{{ child.title }}{% endif %}
+                </li>
+            {% endfor %}
+        {% endspaceless %}
+    </ul>
+{% endblock %}

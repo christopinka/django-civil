@@ -1,0 +1,138 @@
+{% extends "admin/change_form.html" %}
+
+{% load url from future %}
+{% load i18n adminmedia mass_update %}
+
+{% block extrahead %}{{ block.super }}
+    <style type="text/css">
+        #col1 {
+            float: left;
+            width: 70%;
+        }
+        #col2 {
+            float: right;
+            width: 30%;
+        }
+        #col2 div {
+            width: 30%;
+            float: left;
+        }
+        #col2 select {
+            width: 70%;
+            float: right;
+        }
+    </style>
+    <script language="javascript" type="text/javascript" src="{{ STATIC_URL }}admin/js/admin/DateTimeShortcuts.js"></script>
+    <script language="javascript" type="text/javascript">
+        (function($) {
+            $('.col_field input, .col_field select').each(function() {
+                $(this).attr('disabled', 'disabled');
+            });
+            $('.fastfieldvalue').click(function() {
+                var check = $(this).parent().parent().find('.enabler');
+                var selection = $(this).text();
+                $(check).attr('checked', true);
+                var target = $(this).parent().parent().find('input, select').not('.enabler');
+                $(target).removeAttr('disabled');
+                if ($(target).is('select')) {
+                    $('option', target).each(function(i, selected) {
+                        if ($(this).text() == selection) {
+                            $(this).attr('selected', true);
+                        }
+                    });
+                } else if ($(target).is('input[type=checkbox]')) {
+                    $(target).attr('checked', selection=='True');
+                } else if ($(target).is('input')) {
+                    $(target).val(selection);
+                }
+            });
+            $('.enabler').click(function() {
+                var target = $(this).parent().parent().find('.col_field input, .col_field select');
+                if ($(this).is(':checked')) {
+                    $(target).removeAttr('disabled');
+                } else {
+                    $(target).attr('disabled', 'disabled');
+                }
+            })
+        }(django.jQuery));
+    </script>
+{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+    <div id="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+        <a href="{% url 'admin:app_list' app_label %}">{% trans app_label|capfirst|escape %}</a> &rsaquo;
+        <a href=".">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
+        Mass Update
+    </div>
+{% endif %}{% endblock %}
+
+{% block content-class %}content-flexible{% endblock %}
+
+{% block content %}
+    {% if form.subject.errors %}
+        <ol>
+            {% for error in form.subject.errors %}
+                <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+    <div id="col1">
+        <form method="post" action="">{% csrf_token %}
+
+            <table>
+                {% for field in adminform.form.configured_fields %}
+                    <tr>
+                        <td>{% if field.field.required %}<b>{% endif %}
+                            {{ field.label_tag }}
+                            {% if field.field.required %}</b>{% endif %}
+                        </td>
+                        <td colspan="3">
+                            {{ field.errors }}
+                            {{ field }}{% if field.help_text %}&nbsp;<span class="help">{{ field.help_text }}</span>{% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr><td colspan="4">&nbsp;</td></tr>
+                <tr><th>field name </th><th>update</th><th>new value</th><th>existing values <small><i>(some of the most used )</i></small></th></tr>
+                {% for field in adminform.form.model_fields %}
+                    <tr class="{{ field.name }}-row">
+                        <td>{% if field.field.required %}<b>{% endif %}
+                            {{ field.label_tag }}
+                            {% if field.field.required %}</b>{% endif %}</td>
+                        <td class="col_enabler">
+                            <input type="checkbox" name="chk_id_{{ field.name }}" class="enabler"></td>
+                        <td class="col_field field-{{ field.name }}-value">
+                            {{ field.errors }}{{ field }}&nbsp;</td>
+                        <td class="field-{{ field.name }}-commonvalues">
+                            {% link_fields_values grouped field.name %}&nbsp;</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <input type="hidden" name="action" value="{{ action }}"/>
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            <div class="module footer">
+                <ul class="submit-row">
+                    <li class="left cancel-button-container"><a href="." class="cancel-link">{% trans "Cancel" %}</a></li>
+                    <li class="submit-button-container"><input type="submit" value="{% trans 'Update records' %}" class="default" name="apply" /></li>
+                </ul>
+                <br clear="all" />
+            </div>
+
+        </form>
+    </div>
+
+    <div id="col2">
+        <div>Selected records:</div>
+        <select size="100">
+            {% for el in selection %}
+            <option>{{ el }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}

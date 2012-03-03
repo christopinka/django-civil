@@ -1,0 +1,71 @@
+[
+   {
+     "pk": 1,
+     "model": "sites.site",
+     "fields": {
+       "domain": "canipercaso.it",
+       "name": "canipercaso.it"
+     }
+   },
+
+   {
+      "pk": 1,
+      "model": "auth.user",
+      "fields": {
+         "username": "kraken",
+         "first_name": "Lucio",
+         "last_name": "Asnaghi",
+         "is_active": true,
+         "is_superuser": true,
+         "is_staff": true,
+         "last_login": "2010-05-22 08:00:00",
+         "groups": [],
+         "user_permissions": [],
+         "password": "sha1$bc0bb$3af8199ae9b03f0bd3428f27d75df589670abe04",
+         "email": "kunitoki@gmail.com",
+         "date_joined": "2010-05-22 08:00:00"
+      }
+   },
+
+   { "pk": 1, "model": "base.group", "fields": { "name": "Cani per Caso", "created": "2010-05-22 08:00:00" } },
+   { "pk": 2, "model": "base.group", "fields": { "name": "Asilo per Cani", "created": "2010-05-22 08:00:00" } },
+   { "pk": 3, "model": "base.group", "fields": { "name": "Veterinari", "created": "2010-05-22 08:00:00" } },
+
+   {
+    "pk": 1,
+    "model": "base.contact",
+    "fields": {
+      "dont_mail": false,
+      "first_name": "Lucio",
+      "last_name": "Asnaghi",
+      "suffix": null,
+      "type": null,
+      "notes": "",
+      "is_active": true,
+      "decease_date": null,
+      "sex": null,
+      "dont_post": false,
+      "prefix": null,
+      "dont_sms": false,
+      "birth_date": null,
+      "nickname": "",
+      "second_name": "",
+      "deceased": false,
+      "dont_call": false,
+      "created": "2010-05-22 08:00:00"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "base.email",
+    "fields": {
+      "main": true,
+      "type": 1,
+      "contact": 1,
+      "address": "kunitoki@gmail.com",
+      "created": "2010-05-22 08:00:00"
+    }
+  }
+
+]

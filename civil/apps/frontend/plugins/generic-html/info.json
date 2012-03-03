@@ -1,0 +1,10 @@
+{
+  "name": "Generic Html",
+  "slug": "generic-html",
+  "version": 0.1,
+  "files": [
+    "info.json",
+    "main.py",
+    "__init__.py"
+  ]
+}

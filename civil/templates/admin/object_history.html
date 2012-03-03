@@ -1,0 +1,24 @@
+{% smart_extends "admin/object_history.html" %}
+
+<!-- LOADING -->
+{% load url from future %}
+{% load admin_urls i18n string_manip %}
+
+<!-- BREADCRUMBS -->
+{% block breadcrumbs %}
+    <div id="breadcrumbs" class="breadcrumbs"> 
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a> &rsaquo;
+        <a href="{% url 'admin:app_list' app_label %}">{{ app_label|capfirst }}</a> &rsaquo;
+        <a href="{% url opts|admin_urlname:'changelist' %}">{{ module_name }}</a> &rsaquo; 
+        {% if request.META.HTTP_REFERER|endswith:"/view/" %}
+            <a href="../view/">{{ object|truncatewords:"18" }}</a> &rsaquo;
+        {% else %}
+            {% if request.META.HTTP_REFERER|endswith:"/change/" %}
+                <a href="../change/">{{ object|truncatewords:"18" }}</a> &rsaquo;
+            {% else %}
+                <a href="{% url opts|admin_urlname:'changelist' %}">{{ object|truncatewords:"18" }}</a> &rsaquo;
+            {% endif %}
+        {% endif %}
+        {% trans 'History' %}
+    </div>
+{% endblock %}

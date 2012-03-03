@@ -1,0 +1,35 @@
+[
+
+  {
+    "pk": 1,
+    "model": "contribute.contributiontype",
+    "fields": {
+      "modified": "2012-02-11 15:06:40",
+      "name": "Quota Iscrizione",
+      "created": "2012-02-11 15:06:40"
+    }
+  },
+
+  {
+    "pk": 1,
+    "model": "contribute.subscriptiontype",
+    "fields": {
+      "length_type": 4,
+      "description": "",
+      "created": "2012-02-11 15:06:45",
+      "is_active": true,
+      "modified": "2012-02-11 15:06:45",
+      "period": 1,
+      "length": 1,
+      "contribution_type": 1,
+      "to_day": 31,
+      "minimum_cost": 0,
+      "to_month": 12,
+      "from_day": 1,
+      "from_month": 1,
+      "name": "Associazione Annuale"
+    }
+  }
+
+
+]
