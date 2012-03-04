@@ -1,4 +1,6 @@
 *.pyc
 package.sh
+civil/media/*
+civil/static/*
 civil/thirdparty/*
-civil/data/*
+civil/data/fixtures/*

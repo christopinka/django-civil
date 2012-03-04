@@ -29,19 +29,19 @@ def customizable_admin(cls):
                     self.fieldsets = list(self.fieldsets)
                 fieldset = ContentTypeCustomField.get_fieldset_for_model(self.form._meta.model)
                 if fieldset: self.fieldsets.append(fieldset)
-    
+
         def get_form(self, request, obj=None, **kwargs):
             ## modify visualization for certain users
             #if not request.user.is_superuser:
             #    self.exclude.append('field_to_hide')
             #    self.inlines.remove(UserInline)
             #    pass
-            form = super(CustomSearchableAdmin, self).get_form(request, obj, **kwargs)        
+            form = super(CustomSearchableAdmin, self).get_form(request, obj, **kwargs)
             return form
-    
+
         def get_changelist(self, request, **kwargs):
             return CustomChangeList
-    
+
         def queryset(self, request):
             qs = super(CustomSearchableAdmin, self).queryset(request)
             #qs = qs.filter(Q(is_staff=True) | Q(is_superuser=True))
@@ -51,7 +51,7 @@ def customizable_admin(cls):
             has_permission = super(CustomSearchableAdmin, self).has_change_permission(request, obj)
             #if obj is not None and not request.user.is_superuser and request.user.id != obj.user.id:
             return has_permission
-    
+
     return CustomSearchableAdmin
 
 
@@ -87,11 +87,6 @@ class ContentTypeCustomFieldAdmin(BaseAdmin):
         }),
         (None, {
             'fields': (
-                ('decimal_places', 'max_digits'),
-            )
-        }),
-        (None, {
-            'fields': (
                 'validator',
             )
         }),
@@ -101,7 +96,7 @@ class ContentTypeCustomFieldAdmin(BaseAdmin):
         js = (
             '%sadmin/js/contenttypecustomfield.js' % settings.STATIC_URL,
         )
-    
+
 admin.site.register(ContentTypeCustomField, ContentTypeCustomFieldAdmin)
 
 
