@@ -13,7 +13,7 @@ management system solution, especially built for non-profit and non-governmental
 groups.
 
 
-# Features
+## Features
 
 * contacts and groups management
 * contribution system with payment registrations
@@ -23,7 +23,7 @@ groups.
 * frontend integration of contacts registration and payment (TODO)
 
 
-# Dependencies
+## Dependencies
 
 * Django-1.3.1
 * django-grappelli-2.3.5
