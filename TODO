@@ -68,37 +68,35 @@ django-civil
 
 - Frontend
 
- * gestione articoli (10%)
- * configurazione menu del sito (struttura) (0%)
-            . tipologie di pagine linkabili (lista articoli, articolo singolo, etc..)
- * gallerie caricamento immagini (singole / batch) (0%)
+ * articles handling (10%)
+ * menu configuration (structure) (0%)
+            . type of linked pages from menu (article list, single article, etc...)
+ * galleries (single / batch) (0%)
             . https://code.google.com/p/django-photologue
- * gallerie manipolazione immagini (rotate, scale, resize, blah blah) (0%)
+ * galleries image manipulation (rotate, scale, resize, etc...) (0%)
             . https://github.com/sorl/sorl-thumbnail
- * configurezione skins (25%)
+ * skin configuration (25%)
             . http://blueprintcss.org/
- * gestione moduli e personalizzazione div nelle skins (0%)
- * categorie (0%)
+ * categories (0%)
  * news (0%)
- * commenti (threads) (0%)
+ * comments (threads) (0%)
             . https://github.com/HonzaKral/django-threadedcomments/tree/master/threadedcomments
- * gestione articoli (0%)
- * registrazione utente / richiesta password (0%)
- * modifica dati personali dal sito frontend (0%)
+ * user registration / lost password (0%)
+ * user profile editing (0%)
 
 
 - Tagging
 
- * gestione tags (100%)
+ * tags handling (100%)
             . http://code.google.com/p/django-tagging/
- * impostare tags per ogni oggetto (0%)
- * ricerca oggetti per tag (0%)
- * tag clouds nella dashboard (0%)
+ * tags for every model (0%)
+ * search objects by tag (0%)
+ * tag clouds in dashboard (0%)
 
 
 - Mobile
 
- * gestione del sito via mobile (0%)
+ * mobile version (0%)
             . https://github.com/gregmuellegger/django-mobile
 
 

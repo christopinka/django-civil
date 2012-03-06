@@ -4,3 +4,4 @@ civil/media/*
 civil/static/*
 civil/thirdparty/*
 civil/data/fixtures/*
+civil/database/default.sqlite
