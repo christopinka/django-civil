@@ -6,15 +6,21 @@ _/          _/      _/  _/      _/    _/
  _/_/_/  _/_/_/      _/      _/_/_/  _/_/_/_/
 ```
 
-# What is Django-CIVIL ?
+## Introduction
+
+### What is Django-CIVIL ?
 
 It is a complete constituent relationship management and content management
 system solution, especially built for non-profit and non-governmental groups.
 The aim of the project is to build a fast, compact and maintainable aternative
 to CiviCRM-Joomla, in a more pythonic and django-like flavour.
 
-# Who can make use of Django-CIVIL ?
+### Who will benefit of Django-CIVIL ?
 
+Every cultural associations, with contributors and associations fees.
+Amateur sports clubs can also benefit from this as it will allow to keep track
+of incomes and user registrations for every year of service.
+Anyone who needs to keep an eye on contacts and should send newsletters to them.
 
 
 ## Features
