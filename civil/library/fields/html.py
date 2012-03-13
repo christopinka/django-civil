@@ -20,7 +20,7 @@ CKEDITOR_CONFIGS = dict((k, json.dumps(v)) for k, v in settings.CKEDITOR_CONFIGS
 FILEBROWSER_PRESENT = 'filebrowser' in getattr(settings, 'INSTALLED_APPS', [])
 GRAPPELLI_PRESENT = 'grappelli' in getattr(settings, 'INSTALLED_APPS', [])
 
-MEDIA = getattr(settings, 'CKEDITOR_MEDIA_URL',
+CKEDITOR_MEDIA_URL = getattr(settings, 'CKEDITOR_MEDIA_URL',
                 '%s' % settings.STATIC_URL.rstrip('/')).rstrip('/')
 
 _CSS_FILE = 'grappelli.css' if GRAPPELLI_PRESENT else 'standard.css'
@@ -63,12 +63,12 @@ class CKEditor(forms.Textarea):
 
     class Media:
         js = (
-            MEDIA + '/ckeditor/ckeditor/ckeditor.js',
-            MEDIA + '/ckeditor/init.js',
+            CKEDITOR_MEDIA_URL + '/ckeditor/ckeditor/ckeditor.js',
+            CKEDITOR_MEDIA_URL + '/ckeditor/init.js',
         )
         css = {
             'screen': (
-                MEDIA + '/ckeditor/css/' + _CSS_FILE,
+                CKEDITOR_MEDIA_URL + '/ckeditor/css/' + _CSS_FILE,
             ),
         }
 

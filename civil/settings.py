@@ -209,6 +209,7 @@ INSTALLED_APPS = (
     '%s.apps.custom' % PROJECT_DIRNAME,
     '%s.apps.definitions' % PROJECT_DIRNAME,
     '%s.apps.frontend' % PROJECT_DIRNAME,
+    '%s.apps.gallery' % PROJECT_DIRNAME,
     '%s.apps.mail' % PROJECT_DIRNAME,
     '%s.apps.mobile' % PROJECT_DIRNAME,
     '%s.apps.search' % PROJECT_DIRNAME,

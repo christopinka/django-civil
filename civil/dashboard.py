@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 
 from grappelli.dashboard import modules, Dashboard
-from grappelli.dashboard.utils import get_admin_site_name
+#from grappelli.dashboard.utils import get_admin_site_name
 
 from civil.library.dashboard.savedsearch import SavedSearches
 from civil.library.dashboard.simplelistmodels import SimpleModelList
@@ -25,7 +25,7 @@ class CustomIndexDashboard(Dashboard):
     """
 
     def init_with_context(self, context):
-        site_name = get_admin_site_name(context)
+        #site_name = get_admin_site_name(context)
 
         # append a group for "Administration" & "Applications"
 #        self.children.append(modules.Group(

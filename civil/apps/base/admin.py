@@ -17,10 +17,6 @@ from .models import *
 #==============================================================================
 #admin.site.unregister(Site)
 
-#admin.site.register(Address, BaseAdmin)
-#admin.site.register(Phone, BaseAdmin)
-#admin.site.register(Email, BaseAdmin)
-#admin.site.register(Website, BaseAdmin)
 
 #==============================================================================
 class GroupAdmin(BaseAdmin):
